@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PETROS 磐石 男士信仰小團體</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        petros: {
+                            green: '#88AB38',
+                            darkgreen: '#58731F',
+                            lime: '#C4DE5E',
+                            stone: '#2D3748',
+                            lightstone: '#F0F4F8',
+                            accent: '#D97706',
+                            gold: '#EAB308'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Noto Serif TC"', 'serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: #0f172a;
+            color: #f1f5f9;
+        }
+        .bg-stone-texture {
+            background-color: #1e293b;
+            background-image: radial-gradient(#334155 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .text-glow {
+            text-shadow: 0 0 12px rgba(196, 222, 94, 0.4);
+        }
+        .card-glass {
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .tab-active {
+            border-bottom: 3px solid #C4DE5E;
+            color: #C4DE5E;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between">
+
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <!-- PETROS Custom Logo Emblem -->
+                <div class="relative w-11 h-11 rounded-2xl bg-gradient-to-br from-slate-800 via-petros-darkgreen to-slate-900 p-0.5 border border-petros-lime/40 shadow-lg shadow-petros-green/20 group hover:scale-105 transition duration-300">
+                    <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center overflow-hidden relative">
+                        <svg class="w-8 h-8 text-petros-lime" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Rock Base -->
+                            <path d="M12 48L24 38L38 46L52 36L56 50H8L12 48Z" fill="#58731F" opacity="0.6"/>
+                            <path d="M8 50L22 42L36 50L56 50L52 54H12L8 50Z" fill="#2D3748"/>
+                            <!-- Glowing Cross -->
+                            <path d="M32 10V42M22 22H42" stroke="#C4DE5E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                            <!-- Rays -->
+                            <path d="M32 14L28 10M32 14L36 10M26 22L22 18M38 22L42 18" stroke="#88AB38" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <div>
+                    <span class="text-[10px] tracking-widest text-petros-lime uppercase font-bold block">Est. 2022 ‧ 男士信仰團體</span>
+                    <h1 class="text-lg md:text-xl font-extrabold font-serif tracking-tight text-white flex items-center gap-2">
+                        PETROS <span class="text-petros-lime">磐石</span>
+                    </h1>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-2 md:gap-3">
+                <button onclick="openModal('calendarModal')" class="bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 px-3 py-2 rounded-xl text-xs md:text-sm font-semibold transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-calendar-days"></i> <span>年度行程日曆</span>
+                </button>
+                <!-- Direct WhatsApp Web App Share Button -->
+                <button onclick="openModal('shareModal')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3.5 py-2 rounded-xl text-xs md:text-sm font-bold transition flex items-center gap-1.5 shadow-lg shadow-emerald-900/40">
+                    <i class="fa-brands fa-whatsapp text-base"></i> <span>分享至 WhatsApp</span>
+                </button>
+                <button onclick="openModal('qrModal', 'contact')" class="bg-petros-green hover:bg-petros-darkgreen text-white px-3 py-2 rounded-xl text-sm font-medium transition flex items-center gap-2">
+                    <i class="fa-solid fa-qrcode"></i> <span class="hidden md:inline">掃碼專區</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-6 space-y-10">
+
+        <!-- Domain Notice Banner if running in local preview -->
+        <div id="domainWarningBanner" class="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-amber-300">
+            <div class="flex items-center gap-2.5">
+                <i class="fa-solid fa-triangle-exclamation text-amber-400 text-lg flex-shrink-0"></i>
+                <div>
+                    <strong class="font-bold text-white block">WhatsApp 連結設置提示：</strong>
+                    <span>你目前正於預覽環境運行。若要讓 WhatsApp 接收者順利打開網頁，請確保在「分享設定」中填入你實際託管的網址。</span>
+                </div>
+            </div>
+            <button onclick="openModal('shareModal')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3.5 py-1.5 rounded-xl whitespace-nowrap transition">
+                <i class="fa-solid fa-gear mr-1"></i> 設定真實網址
+            </button>
+        </div>
+
+        <!-- Banner / Key Verse Section -->
+        <section class="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-800 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900">
+            <div class="absolute inset-0 bg-stone-texture opacity-60"></div>
+            <div class="absolute -top-24 -right-24 w-96 h-96 bg-petros-green/20 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="relative z-10 p-6 md:p-12 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                <!-- Banner Left Content -->
+                <div class="md:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-petros-lime/10 border border-petros-lime/30 text-petros-lime text-xs font-semibold">
+                        <i class="fa-solid fa-cross"></i> 2022年成立 ‧ 男士信仰小團體
+                    </div>
+
+                    <h2 class="text-2xl md:text-4xl font-extrabold font-serif leading-tight text-white">
+                        你們應永遠信賴上主，<br>
+                        因為上主是<span class="text-petros-lime text-glow">永固的磐石</span>。
+                    </h2>
+                    
+                    <p class="text-slate-400 font-serif italic text-sm md:text-base border-l-2 border-petros-lime pl-3">
+                        —— 依撒意亞 26:4
+                    </p>
+
+                    <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+                        歡迎加入 PETROS 磐石男士信仰小團體。我們是一群立志在家庭、職場與社會中依靠基督真道，互相扶持、祈禱靈修與同行的男士弟兄。
+                    </p>
+
+                    <!-- Quick Action Buttons -->
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <button onclick="openModal('shareModal')" class="flex-1 sm:flex-none bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-3 rounded-2xl transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/30">
+                            <i class="fa-brands fa-whatsapp text-xl"></i> 一鍵分享到 WhatsApp 專區
+                        </button>
+                        <button onclick="openModal('calendarModal')" class="flex-1 sm:flex-none bg-amber-600/20 hover:bg-amber-600/30 text-amber-300 border border-amber-500/40 font-semibold px-5 py-3 rounded-2xl transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-calendar-check text-amber-400"></i> 查閱動態行程日曆
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Banner Right Graphic/Card View -->
+                <div class="md:col-span-5 flex justify-center">
+                    <div class="card-glass p-6 rounded-3xl w-full max-w-sm space-y-5 border border-petros-lime/20 shadow-2xl relative">
+                        <!-- PETROS Badge Logo Display -->
+                        <div class="text-center space-y-3 border-b border-slate-700/80 pb-4">
+                            <div class="w-20 h-20 mx-auto rounded-3xl bg-slate-900 p-2 border-2 border-petros-lime/50 flex items-center justify-center shadow-xl shadow-petros-green/30 relative group">
+                                <svg class="w-12 h-12 text-petros-lime" viewBox="0 0 64 64" fill="none">
+                                    <path d="M12 48L24 38L38 46L52 36L56 50H8L12 48Z" fill="#58731F"/>
+                                    <path d="M32 8V42M22 20H42" stroke="#C4DE5E" stroke-width="4" stroke-linecap="round"/>
+                                    <circle cx="32" cy="8" r="3" fill="#EAB308"/>
+                                </svg>
+                                <span class="absolute -bottom-2 bg-petros-green text-[9px] font-bold text-white px-2 py-0.5 rounded-full uppercase tracking-wider">PETROS</span>
+                            </div>
+                            <h3 class="font-bold font-serif text-lg text-white">磐石節目與聯繫</h3>
+                            <p class="text-xs text-slate-400">掃描專用碼或查閱最新日曆表</p>
+                        </div>
+
+                        <!-- 2 QR Code Buttons -->
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="openModal('qrModal', 'web')" class="p-3 bg-slate-800/90 hover:bg-slate-700 rounded-2xl border border-slate-700 text-center transition group">
+                                <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center group-hover:scale-110 transition">
+                                    <i class="fa-solid fa-globe text-lg"></i>
+                                </div>
+                                <span class="text-xs font-bold block text-slate-200">開啟網頁 QR</span>
+                                <span class="text-[10px] text-slate-400">掃碼開啟 Web App</span>
+                            </button>
+
+                            <button onclick="openModal('qrModal', 'contact')" class="p-3 bg-slate-800/90 hover:bg-slate-700 rounded-2xl border border-slate-700 text-center transition group">
+                                <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center group-hover:scale-110 transition">
+                                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                                </div>
+                                <span class="text-xs font-bold block text-slate-200">聯絡 WhatsApp</span>
+                                <span class="text-[10px] text-slate-400">掃碼直接對話</span>
+                            </button>
+                        </div>
+
+                        <button onclick="openModal('calendarModal')" class="w-full bg-slate-900/80 hover:bg-slate-800 p-3 rounded-xl border border-slate-700 text-center text-xs text-amber-300 flex items-center justify-center gap-2 font-medium transition">
+                            <i class="fa-solid fa-calendar-days text-amber-400"></i> 點擊打開動態年度節目行程表
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Multi-Year Calendar Featured Banner Section -->
+        <section class="card-glass p-6 md:p-8 rounded-3xl border border-amber-500/30 space-y-6 bg-gradient-to-br from-slate-900 via-slate-900/90 to-amber-950/20">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                <div class="space-y-1">
+                    <span class="text-amber-400 text-xs font-bold uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-calendar-check"></i> Dynamic Event Calendar
+                    </span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold font-serif text-white">
+                        磐石男士信仰小團體 <span id="bannerCalendarYearText" class="text-amber-400">2026/2027 年度日曆</span>
+                    </h2>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="openModal('addEventModal')" class="bg-emerald-600/80 hover:bg-emerald-600 text-white font-bold px-3.5 py-2.5 rounded-xl text-xs md:text-sm transition flex items-center gap-1.5 border border-emerald-500/40">
+                        <i class="fa-solid fa-calendar-plus"></i> 新增行程
+                    </button>
+                    <button onclick="openModal('calendarModal')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs md:text-sm transition flex items-center gap-2 shadow-lg shadow-amber-500/20">
+                        <i class="fa-solid fa-expand"></i> 展開完整日曆檢視
+                    </button>
+                </div>
+            </div>
+
+            <!-- Calendar Preview Grid Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Q1 Preview -->
+                <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-3 hover:border-amber-500/40 transition">
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                        <span class="text-xs font-bold text-amber-400 font-serif">第一季 (1月 - 3月)</span>
+                        <span class="text-[10px] bg-amber-500/10 text-amber-300 px-2 py-0.5 rounded-full">Q1 節目</span>
+                    </div>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-mountain text-petros-lime mt-0.5"></i>
+                            <div>
+                                <strong class="text-white">1月：</strong>開年靈修避靜營（團費活動）
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-hands-praying text-emerald-400 mt-0.5"></i>
+                            <div>
+                                <strong class="text-white">2月：</strong>四旬期預備與男士專題靈修
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-cross text-amber-400 mt-0.5"></i>
+                            <div>
+                                <strong class="text-white">3月：</strong>四旬期拜苦路與若瑟主保節
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Q2 Preview -->
+                <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-3 hover:border-amber-500/40 transition">
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                        <span class="text-xs font-bold text-amber-400 font-serif">第二季 (4月 - 6月)</span>
+                        <span class="text-[10px] bg-amber-500/10 text-amber-300 px-2 py-0.5 rounded-full">Q2 節目</span>
+                    </div>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-sun text-amber-400 mt-0.5"></i>
+                            <div>
+                                <strong class="text-white">4月：</strong>復活節慶祝與主日分享
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-hammer text-petros-lime mt-0.5"></i>
+                            <div>
+                                <strong class="text-white">5月：</strong>聖若瑟勞工主保慶日與職場研討
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-users text-blue-400 mt-0.5"></i>
+                            <div>
+                                <strong class="text-white">6月：</strong>團體成立周年紀念與家庭同樂日
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Q3 Preview -->
+                <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-3 hover:border-amber-500/40 transition">
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                        <span class="text-xs font-bold text-amber-400 font-serif">第三季 (7月 - 9月)</span>
+                        <span class="text-[10px] bg-amber-500/10 text-amber-300 px-2 py-0.5 rounded-full">Q3 節目</span>
+                    </div>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-hiking text-emerald-400 mt-0.5"></i>
+                            <div>
+                                <strong class="text-white">7月-8月：</strong>夏季戶外遠足與大自然靈修
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-briefcase text-purple-400 mt-0.5"></i>
+                            <div>
+                                <strong class="text-white">9月：</strong>職場基督徒使命與心理健康講座
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Q4 Preview -->
+                <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-3 hover:border-amber-500/40 transition">
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                        <span class="text-xs font-bold text-amber-400 font-serif">第四季 (10月 - 12月)</span>
+                        <span class="text-[10px] bg-amber-500/10 text-amber-300 px-2 py-0.5 rounded-full">Q4 節目</span>
+                    </div>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-heart text-red-400 mt-0.5"></i>
+                            <div>
+                                <strong class="text-white">10月：</strong>社區弱勢探訪與福傳服務
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-star text-gold mt-0.5"></i>
+                            <div>
+                                <strong class="text-white">11月-12月：</strong>將臨期預備與年終感恩晚會
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Pillars Section -->
+        <section id="pillarsSection" class="space-y-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <span class="text-petros-lime text-xs font-bold uppercase tracking-wider">Our Core Pillars</span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold font-serif text-white">五大核心事工</h2>
+                </div>
+                <p class="text-slate-400 text-sm max-w-md">
+                    透過聖言、祈禱、福傳、聯誼與專題討論，全方位建立屬靈男士的堅固磐石。
+                </p>
+            </div>
+
+            <!-- Tab Navigation Bar -->
+            <div class="flex overflow-x-auto gap-2 pb-2 scrollbar-none border-b border-slate-800">
+                <button onclick="switchTab('tab-word')" id="btn-tab-word" class="tab-btn tab-active px-4 py-3 whitespace-nowrap text-sm font-medium flex items-center gap-2 transition">
+                    <i class="fa-solid fa-book-bible text-petros-lime"></i> 聖言分享
+                </button>
+                <button onclick="switchTab('tab-prayer')" id="btn-tab-prayer" class="tab-btn px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-400 hover:text-slate-200 flex items-center gap-2 transition">
+                    <i class="fa-solid fa-hands-praying text-emerald-400"></i> 祈禱靈修
+                </button>
+                <button onclick="switchTab('tab-evangel')" id="btn-tab-evangel" class="tab-btn px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-400 hover:text-slate-200 flex items-center gap-2 transition">
+                    <i class="fa-solid fa-bullhorn text-amber-400"></i> 福傳事工
+                </button>
+                <button onclick="switchTab('tab-fellowship')" id="btn-tab-fellowship" class="tab-btn px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-400 hover:text-slate-200 flex items-center gap-2 transition">
+                    <i class="fa-solid fa-people-group text-blue-400"></i> 聯誼聚會
+                </button>
+                <button onclick="switchTab('tab-discussion')" id="btn-tab-discussion" class="tab-btn px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-400 hover:text-slate-200 flex items-center gap-2 transition">
+                    <i class="fa-solid fa-comments text-purple-400"></i> 專題討論
+                </button>
+            </div>
+
+            <!-- TAB CONTENT 1: 聖言分享 -->
+            <div id="tab-word" class="tab-content space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="md:col-span-2 card-glass p-6 rounded-2xl space-y-4">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                            <h3 class="font-bold text-lg text-white font-serif flex items-center gap-2">
+                                <i class="fa-solid fa-scroll text-petros-lime"></i> 本週默想聖言
+                            </h3>
+                            <span class="text-xs text-petros-lime bg-petros-lime/10 px-2.5 py-1 rounded-full">依撒意亞 26:4</span>
+                        </div>
+                        <blockquote class="text-lg md:text-xl font-serif text-slate-100 italic leading-relaxed bg-slate-900/50 p-4 rounded-xl border-l-4 border-petros-green">
+                            「你們應永遠信賴上主，因為上主是永固的磐石。」
+                        </blockquote>
+                        <div class="space-y-2 text-sm text-slate-300">
+                            <h4 class="font-bold text-petros-lime">【屬靈反省】</h4>
+                            <p>在現代快節奏與高壓力的職場和家庭角色中，男士常獨自承擔風浪。這節經文提醒我們：世俗的名利與地位終會動搖，惟有上主是永遠可靠的磐石。當我們把生命建基於上主之上，內心便得享堅固的平安。</p>
+                        </div>
+                        <div class="pt-2 flex flex-wrap gap-2">
+                            <button onclick="generateAIWisdom()" class="bg-petros-green hover:bg-petros-darkgreen text-white text-xs px-4 py-2 rounded-xl font-semibold flex items-center gap-2 transition">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> AI 聖言靈修助手
+                            </button>
+                            <button onclick="openModal('calendarModal')" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-4 py-2 rounded-xl transition">
+                                查看聖言讀經計畫
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Scripture Search / Quick Verses -->
+                    <div class="card-glass p-6 rounded-2xl space-y-4 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-slate-100 font-serif mb-3 flex items-center gap-2">
+                                <i class="fa-solid fa-bookmark text-amber-400"></i> 男士磐石金句庫
+                            </h3>
+                            <ul class="space-y-3 text-xs text-slate-300">
+                                <li class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-800 hover:border-petros-lime/40 cursor-pointer transition" onclick="showVerse('若蘇厄書 1:9', '我不是吩咐了你：『你當勇敢堅強』嗎？所以，你不要害怕，也不要膽怯，因為不論你到哪裡去，上主你的天主必與你同在。')">
+                                    <span class="font-bold text-petros-lime block">若蘇厄書 1:9</span>
+                                    「你當勇敢堅強，不要害怕...」
+                                </li>
+                                <li class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-800 hover:border-petros-lime/40 cursor-pointer transition" onclick="showVerse('箴言 27:17', '鐵磨鐵，磨出刃來；人與人相處，也磨礪出智慧。')">
+                                    <span class="font-bold text-petros-lime block">箴言 27:17</span>
+                                    「鐵磨鐵，磨出刃來...」
+                                </li>
+                                <li class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-800 hover:border-petros-lime/40 cursor-pointer transition" onclick="showVerse('格林多前書 16:13-14', '你們務要警醒，在信仰上要站立得穩，要作勇敢的人，要堅強。你們所做的一切，都要以愛心去做。')">
+                                    <span class="font-bold text-petros-lime block">格林多前書 16:13-14</span>
+                                    「在信仰上要站立得穩，要作勇敢的人...」
+                                </li>
+                            </ul>
+                        </div>
+                        <p class="text-[11px] text-slate-500 italic text-center">點擊經文可放大閱讀</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB CONTENT 2: 祈禱靈修 -->
+            <div id="tab-prayer" class="tab-content hidden space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Interactive Prayer Intentions Wall -->
+                    <div class="md:col-span-2 card-glass p-6 rounded-2xl space-y-4">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                            <div>
+                                <h3 class="font-bold text-lg text-white font-serif flex items-center gap-2">
+                                    <i class="fa-solid fa-hands-praying text-emerald-400"></i> 磐石弟兄代禱牆
+                                </h3>
+                                <p class="text-xs text-slate-400">彼此擔當重擔，同心向天主祈求</p>
+                            </div>
+                            <button onclick="openModal('addPrayerModal')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs px-3 py-2 rounded-xl font-medium transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-plus"></i> 提代禱意向
+                            </button>
+                        </div>
+
+                        <!-- Dynamic Prayer List -->
+                        <div id="prayerList" class="space-y-3 max-h-96 overflow-y-auto pr-1">
+                            <!-- Items populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Daily Spiritual Tips & Rosary -->
+                    <div class="card-glass p-6 rounded-2xl space-y-4">
+                        <h3 class="font-bold text-slate-100 font-serif flex items-center gap-2">
+                            <i class="fa-solid fa-cross text-petros-lime"></i> 靈修指引
+                        </h3>
+                        <div class="space-y-3 text-xs text-slate-300">
+                            <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800">
+                                <span class="font-bold text-emerald-400 block mb-1">每日聖號祈禱</span>
+                                <p>以因父、及子、及聖神之名開端，將今日的工作、家庭責任與試探奉獻於天主手中。</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800">
+                                <span class="font-bold text-amber-400 block mb-1">男士主保：大聖若瑟</span>
+                                <p>學習若瑟的沉默、忠誠、順服與勤勞，成為家庭與團體的守護者。</p>
+                            </div>
+                        </div>
+                        <button onclick="openModal('calendarModal')" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs py-2.5 rounded-xl border border-slate-700 font-medium transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-heart"></i> 了解團體祈禱時間
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB CONTENT 3: 福傳事工 -->
+            <div id="tab-evangel" class="tab-content hidden space-y-6">
+                <div class="card-glass p-6 md:p-8 rounded-2xl space-y-6">
+                    <div class="max-w-2xl">
+                        <span class="text-amber-400 text-xs font-bold uppercase tracking-wider">Evangelism & Mission</span>
+                        <h3 class="text-2xl font-bold font-serif text-white mt-1">福傳事工 ‧ 活出基督光鹽</h3>
+                        <p class="text-slate-300 text-sm mt-2">
+                            磐石團體積極推動福傳工作，鼓勵弟兄將信仰融入職場、日常生活與社區服務，以生命影響生命。
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-2">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg font-bold">
+                                <i class="fa-solid fa-briefcase"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-sm">職場福傳</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed">在工作中體現誠實、公義與愛心，作有標桿的基督徒企業家與打工者。</p>
+                        </div>
+
+                        <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-2">
+                            <div class="w-10 h-10 rounded-xl bg-petros-lime/20 text-petros-lime flex items-center justify-center text-lg font-bold">
+                                <i class="fa-solid fa-house-chimney"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-sm">家庭屬靈頭銜</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed">幫助丈夫與父親在家庭中建立信仰氛圍，帶領家人走修德成聖之道。</p>
+                        </div>
+
+                        <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-2">
+                            <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-lg font-bold">
+                                <i class="fa-solid fa-hand-holding-heart"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-sm">社區關懷探訪</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed">定期開展弱勢社群關懷服務，傳遞天主的慈悲與溫暖。</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-petros-green/10 border border-petros-green/30 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="text-petros-lime text-2xl"><i class="fa-solid fa-seedling"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm text-white">想了解更多福傳活動？</h4>
+                                <p class="text-xs text-slate-300">歡迎與我們聯絡，一起加入福傳行列！</p>
+                            </div>
+                        </div>
+                        <button onclick="openWhatsApp('我想了解福傳事工詳情')" class="bg-petros-green hover:bg-petros-darkgreen text-white text-xs px-5 py-2.5 rounded-xl font-bold transition whitespace-nowrap">
+                            聯絡福傳小組
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB CONTENT 4: 聯誼聚會 -->
+            <div id="tab-fellowship" class="tab-content hidden space-y-6">
+                <div class="card-glass p-6 rounded-2xl space-y-6">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-bold font-serif text-white flex items-center gap-2">
+                                <i class="fa-solid fa-calendar-days text-blue-400"></i> 近期聯誼與聚會活動
+                            </h3>
+                            <p class="text-xs text-slate-400">定期主日聚會、戶外靈修、兄弟餐會</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Event Card 1 -->
+                        <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-3 relative overflow-hidden">
+                            <div class="flex justify-between items-start">
+                                <span class="bg-blue-500/20 text-blue-400 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">月度常規聚會</span>
+                                <span class="text-xs text-slate-400"><i class="fa-regular fa-clock"></i> 隔週六 19:30</span>
+                            </div>
+                            <h4 class="font-bold text-white text-base">【磐石夜聚】聖言分享與主題研討</h4>
+                            <p class="text-xs text-slate-300">深入探討主日福音，並進行男士生活經驗交流與互相代禱。</p>
+                            <div class="flex items-center justify-between pt-2 text-xs">
+                                <span class="text-slate-400"><i class="fa-solid fa-location-dot text-red-400"></i> 教會小組聚會室</span>
+                                <button onclick="rsvpEvent('磐石夜聚')" class="bg-slate-800 hover:bg-slate-700 text-petros-lime border border-slate-700 px-3 py-1.5 rounded-lg transition font-medium">
+                                    報名參加
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Event Card 2 -->
+                        <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-3">
+                            <div class="flex justify-between items-start">
+                                <span class="bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">特別戶外靈修</span>
+                                <span class="text-xs text-slate-400"><i class="fa-regular fa-clock"></i> 週末半日遊</span>
+                            </div>
+                            <h4 class="font-bold text-white text-base">【磐石行腳】男士戶外遠足與大自然祈禱</h4>
+                            <p class="text-xs text-slate-300">走進天主創造的大自然，運動強身同時放鬆心靈，建立深厚兄弟情誼。</p>
+                            <div class="flex items-center justify-between pt-2 text-xs">
+                                <span class="text-slate-400"><i class="fa-solid fa-mountain text-emerald-400"></i> 郊野公園登山步道</span>
+                                <button onclick="rsvpEvent('磐石行腳戶外靈修')" class="bg-slate-800 hover:bg-slate-700 text-petros-lime border border-slate-700 px-3 py-1.5 rounded-lg transition font-medium">
+                                    報名參加
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB CONTENT 5: 專題討論 -->
+            <div id="tab-discussion" class="tab-content hidden space-y-6">
+                <div class="card-glass p-6 rounded-2xl space-y-6">
+                    <div>
+                        <h3 class="text-xl font-bold font-serif text-white flex items-center gap-2">
+                            <i class="fa-solid fa-comments text-purple-400"></i> 男士信仰與生活專題討論
+                        </h3>
+                        <p class="text-xs text-slate-400">針對現代男士關注的核心課題，開放、真誠地探討與分享</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-2">
+                            <span class="text-purple-400 text-xs font-bold">專題 01</span>
+                            <h4 class="font-bold text-white text-sm">職場使命與靈性平衡</h4>
+                            <p class="text-xs text-slate-400">如何在競爭激烈的現代職場中保持信仰原則？處理壓力與名利誘惑。</p>
+                        </div>
+                        <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-2">
+                            <span class="text-purple-400 text-xs font-bold">專題 02</span>
+                            <h4 class="font-bold text-white text-sm">男士角色：丈夫與父親</h4>
+                            <p class="text-xs text-slate-400">學習大聖若瑟的模範，如何在家庭中給予愛、安全感與屬靈引導。</p>
+                        </div>
+                        <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-2">
+                            <span class="text-purple-400 text-xs font-bold">專題 03</span>
+                            <h4 class="font-bold text-white text-sm">情緒管理與弟兄支援</h4>
+                            <p class="text-xs text-slate-400">打破男士「有淚不輕彈」的孤立，在信仰小組中建立真誠互信的夥伴關係。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive AI Spiritual Companion Widget -->
+        <section class="card-glass p-6 md:p-8 rounded-3xl border border-petros-lime/30 relative overflow-hidden">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div class="space-y-2 max-w-xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-petros-lime/10 text-petros-lime text-xs font-bold">
+                        <i class="fa-solid fa-robot"></i> 磐石 AI 靈修助手 (Gemini Powered)
+                    </div>
+                    <h3 class="text-2xl font-bold font-serif text-white">想尋找針對個人境況的聖言導引？</h3>
+                    <p class="text-sm text-slate-300">
+                        輸入你目前面臨的挑戰（例如：職場壓力、家庭關係、信仰疑惑），AI 靈修助手將為你配對天主聖言與反省祈禱。
+                    </p>
+                </div>
+
+                <div class="w-full md:w-auto">
+                    <button onclick="openModal('aiModal')" class="w-full md:w-auto bg-gradient-to-r from-petros-green to-petros-darkgreen hover:from-petros-darkgreen hover:to-petros-green text-white font-bold px-6 py-3.5 rounded-2xl shadow-xl transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-sparkles"></i> 啟動 AI 靈修對話
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- External Links: Facebook, Bible, Vatican News -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div class="card-glass p-6 rounded-3xl border border-blue-500/30">
+                <a href="https://www.facebook.com/groups/1369390048539986" target="_blank" rel="noopener noreferrer"
+                   class="flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white font-bold px-5 py-3 rounded-2xl transition">
+                    <i class="fa-brands fa-facebook"></i> Facebook 群組
+                </a>
+            </div>
+            <div class="card-glass p-6 rounded-3xl border border-amber-500/30">
+                <a href="https://www.ccreadbible.org/chinesebible" target="_blank" rel="noopener noreferrer"
+                   class="flex items-center justify-center gap-3 bg-amber-600 hover:bg-amber-700 text-white font-bold px-5 py-3 rounded-2xl transition">
+                    <i class="fa-solid fa-book-open"></i> 中文聖經
+                </a>
+            </div>
+            <div class="card-glass p-6 rounded-3xl border border-red-500/30">
+                <a href="https://www.vaticannews.va/zht.html" target="_blank" rel="noopener noreferrer"
+                   class="flex items-center justify-center gap-3 bg-red-700 hover:bg-red-800 text-white font-bold px-5 py-3 rounded-2xl transition">
+                    <i class="fa-solid fa-globe"></i> 梵蒂岡新聞
+                </a>
+            </div>
+        </section>
+
+        <!-- Contact & Group Info Section -->
+        <section id="quickContact" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Left: Direct Contact Options -->
+            <div class="card-glass p-6 rounded-3xl space-y-4">
+                <h3 class="text-xl font-bold font-serif text-white flex items-center gap-2">
+                    <i class="fa-solid fa-address-book text-petros-lime"></i> 聯絡與加入磐石
+                </h3>
+                <p class="text-sm text-slate-300">
+                    不論你是正在尋找信仰夥伴，還是希望進一步認識天主，磐石男士信仰小團體都熱切歡迎你！
+                </p>
+
+                <div class="space-y-3 pt-2">
+                    <a href="javascript:void(0)" onclick="openWhatsApp()" class="flex items-center gap-4 p-3.5 bg-slate-900/80 hover:bg-slate-800 rounded-2xl border border-slate-800 transition">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 block">WhatsApp 即時通訊</span>
+                            <span class="text-sm font-bold text-white">點擊直接聯絡磐石小組</span>
+                        </div>
+                    </a>
+
+                    <div class="flex items-center gap-4 p-3.5 bg-slate-900/80 rounded-2xl border border-slate-800">
+                        <div class="w-12 h-12 rounded-xl bg-petros-lime/20 text-petros-lime flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-users-line"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 block">聚會對象</span>
+                            <span class="text-sm font-bold text-white">全港/各地天主教男士及慕道者</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Contact Message Form -->
+            <div class="card-glass p-6 rounded-3xl space-y-4">
+                <h3 class="text-xl font-bold font-serif text-white flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane text-blue-400"></i> 線上留言聯絡
+                </h3>
+                <form onsubmit="handleContactSubmit(event)" class="space-y-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">姓名 / 弟兄稱呼</label>
+                        <input type="text" id="contactName" required placeholder="例如：陳弟兄" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:border-petros-lime">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">聯絡電話 / WhatsApp</label>
+                        <input type="tel" id="contactPhone" required placeholder="例如：+852 9123 4567" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:border-petros-lime">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">感興趣的事工 / 查詢事項</label>
+                        <select id="contactTopic" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:border-petros-lime">
+                            <option value="加入磐石團體">加入磐石小團體</option>
+                            <option value="參加聚會與聯誼">參加聚會與聯誼</option>
+                            <option value="代禱與信仰交流">代禱與信仰交流</option>
+                            <option value="其他查詢">其他查詢</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-petros-green hover:bg-petros-darkgreen text-white font-bold py-2.5 rounded-xl text-sm transition">
+                        送出聯絡訊息
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-8 px-4 mt-12 text-center text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto space-y-3">
+            <div class="flex justify-center items-center gap-2 text-slate-300 font-serif font-bold text-sm">
+                <i class="fa-solid fa-dove text-petros-lime"></i> PETROS 磐石 男士信仰小團體 (2022年成立)
+            </div>
+            <p>「你們應永遠信賴上主，因為上主是永固的磐石。」—— 依撒意亞 26:4</p>
+            <p class="text-slate-600">© 2026-2027+ PETROS Faith Group. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- MODALS CONTAINER -->
+
+    <!-- Modal 0: Dedicated WhatsApp Sharing Modal with Editable Live Domain Setting -->
+    <div id="shareModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="card-glass max-w-lg w-full p-6 rounded-3xl border border-emerald-500/40 space-y-5 relative text-center">
+            <button onclick="closeModal('shareModal')" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-3xl font-bold shadow-lg shadow-emerald-500/10">
+                <i class="fa-brands fa-whatsapp"></i>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold font-serif text-white">分享 PETROS 磐石 Web App</h3>
+                <p class="text-xs text-slate-400 mt-1">設定你的網站真實網址，以便透過 WhatsApp 順利發送</p>
+            </div>
+
+            <!-- Custom App Live URL Setting Field -->
+            <div class="bg-slate-900/90 p-3.5 rounded-2xl border border-amber-500/30 text-left space-y-2">
+                <label class="text-xs font-bold text-amber-400 flex items-center gap-1.5">
+                    <i class="fa-solid fa-link"></i> Web App 發送網址 (Live Domain URL)：
+                </label>
+                <div class="flex gap-2">
+                    <input type="url" id="customLiveUrlInput" placeholder="例如：https://my-petros-app.github.io" class="flex-grow bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-400 font-mono" oninput="onLiveUrlChanged()">
+                    <button onclick="saveCustomLiveUrl()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs px-3.5 py-2 rounded-xl font-bold whitespace-nowrap transition">
+                        儲存網址
+                    </button>
+                </div>
+                <p class="text-[10px] text-slate-400">當你將網站部署至 GitHub Pages, Netlify 或自訂網域時，請在此填入真實網址。</p>
+            </div>
+
+            <!-- WhatsApp Share Preview Box -->
+            <div class="bg-slate-900/90 p-4 rounded-2xl border border-slate-800 text-left space-y-2">
+                <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider block">WhatsApp 訊息預覽</span>
+                <p id="shareTextPreview" class="text-xs text-slate-300 leading-relaxed font-sans bg-slate-950 p-3 rounded-xl border border-slate-800 select-all whitespace-pre-wrap">
+【PETROS 磐石 男士信仰小團體】
+主內弟兄平安！邀請你一起加入 PETROS 磐石男士信仰小團體。
+✨ 內含最新動態年度節目行程日曆
+✨ AI 聖言靈修助手與代禱牆
+✨ 專題講座與男士團契聚會
+點擊連結開啟 Web App：
+                </p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                <button onclick="shareToWhatsAppDirect()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/40">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> 開啟 WhatsApp 發送
+                </button>
+                <button onclick="copyShareText()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold py-3 rounded-xl text-xs transition flex items-center justify-center gap-2">
+                    <i class="fa-regular fa-copy text-amber-400"></i> 複製內容與連結
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 1: Interactive High-Detection QR Code Modal -->
+    <div id="qrModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="card-glass max-w-md w-full p-6 rounded-3xl border border-petros-lime/40 space-y-4 relative text-center">
+            <button onclick="closeModal('qrModal')" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div id="qrHeaderIcon" class="w-12 h-12 mx-auto rounded-full bg-petros-lime/20 text-petros-lime flex items-center justify-center text-xl font-bold">
+                <i class="fa-solid fa-qrcode"></i>
+            </div>
+            
+            <div>
+                <h3 id="qrModalTitle" class="text-xl font-bold font-serif text-white">磐石專屬掃碼專區</h3>
+                <p id="qrModalSub" class="text-xs text-slate-400 mt-1">請用手機相機或 WhatsApp 掃描下方 QR Code</p>
+            </div>
+
+            <!-- Tab Switcher inside QR Modal -->
+            <div class="flex rounded-xl bg-slate-900 p-1 border border-slate-800 text-xs font-semibold">
+                <button id="qrTabContact" onclick="switchQRType('contact')" class="flex-1 py-1.5 rounded-lg text-slate-400 transition">
+                    <i class="fa-brands fa-whatsapp mr-1"></i> WhatsApp 對話
+                </button>
+                <button id="qrTabWeb" onclick="switchQRType('web')" class="flex-1 py-1.5 rounded-lg text-slate-400 transition">
+                    <i class="fa-solid fa-globe mr-1"></i> Web App 網頁
+                </button>
+            </div>
+
+            <!-- High-Contrast QR Display Container with Quiet Zone -->
+            <div class="p-4 bg-white rounded-2xl inline-block shadow-2xl border-4 border-slate-200 relative group">
+                <img id="mainQrImage" src="" alt="PETROS Scannable QR Code" class="w-48 h-48 mx-auto block object-contain">
+                <div class="mt-2 text-[10px] text-slate-500 font-mono tracking-tight text-center truncate max-w-[200px] mx-auto" id="qrTargetPreview">
+                    連結生成中...
+                </div>
+            </div>
+
+            <!-- Dynamic URL / Phone Editor -->
+            <div class="bg-slate-900/90 p-3 rounded-2xl border border-slate-800 text-left space-y-2">
+                <div class="flex justify-between items-center text-[11px] text-slate-300">
+                    <label id="qrInputLabel" class="font-bold text-petros-lime">自訂 WhatsApp 號碼 / 網址：</label>
+                    <span class="text-slate-500">（即時更新 QR）</span>
+                </div>
+                <div class="flex gap-2">
+                    <input type="text" id="qrCustomInput" placeholder="+852 9123 4567" class="flex-grow bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-petros-lime font-mono" oninput="updateCustomQR()">
+                    <button onclick="testQRLink()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs px-3 py-1.5 rounded-xl font-bold whitespace-nowrap transition">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> 測試開啟
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex gap-2">
+                <button onclick="closeModal('qrModal')" class="w-full bg-slate-800 hover:bg-slate-700 text-white text-xs py-2.5 rounded-xl font-semibold transition">
+                    關閉專區
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Multi-Year Petros Calendar Interactive Viewer & Manager -->
+    <div id="calendarModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 md:p-6 overflow-y-auto">
+        <div class="card-glass max-w-4xl w-full p-6 rounded-3xl border border-amber-500/40 space-y-6 relative my-auto max-h-[90vh] flex flex-col">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold font-serif text-white flex items-center gap-2">
+                            PETROS 磐石 <span id="selectedYearHeaderTitle" class="text-amber-400">2026/2027</span> 年度日曆表
+                        </h3>
+                        <p class="text-xs text-slate-400">可切換年份、月份，或隨時新增後續年份節目</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="openModal('addEventModal')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs px-3 py-1.5 rounded-xl font-bold transition flex items-center gap-1">
+                        <i class="fa-solid fa-plus"></i> 新增活動
+                    </button>
+                    <button onclick="closeModal('calendarModal')" class="text-slate-400 hover:text-white text-xl p-1">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Year Switcher Bar -->
+            <div class="flex items-center gap-2 bg-slate-900/90 p-2 rounded-2xl border border-slate-800 text-xs">
+                <span class="text-slate-400 font-bold px-2"><i class="fa-solid fa-filter text-amber-400 mr-1"></i> 年份選擇:</span>
+                <div class="flex gap-1.5 overflow-x-auto">
+                    <button onclick="switchCalendarYear('all')" id="year-btn-all" class="year-btn bg-slate-800 text-slate-300 px-3 py-1 rounded-xl font-medium transition">
+                        跨年全部
+                    </button>
+                    <button onclick="switchCalendarYear(2026)" id="year-btn-2026" class="year-btn bg-amber-500 text-slate-950 font-bold px-3 py-1 rounded-xl transition">
+                        2026 年
+                    </button>
+                    <button onclick="switchCalendarYear(2027)" id="year-btn-2027" class="year-btn bg-slate-800 text-slate-300 px-3 py-1 rounded-xl font-medium transition">
+                        2027 年
+                    </button>
+                    <button onclick="switchCalendarYear(2028)" id="year-btn-2028" class="year-btn bg-slate-800 text-slate-300 px-3 py-1 rounded-xl font-medium transition">
+                        2028 年+
+                    </button>
+                </div>
+            </div>
+
+            <!-- Month Quick Filter Selector -->
+            <div class="flex overflow-x-auto gap-2 pb-2 scrollbar-none border-b border-slate-800 text-xs">
+                <button onclick="filterCalendarMonth('all')" id="cal-month-all" class="cal-month-btn bg-amber-500 text-slate-950 font-bold px-3 py-1.5 rounded-xl transition">
+                    全期總覽
+                </button>
+                <button onclick="filterCalendarMonth(1)" id="cal-month-1" class="cal-month-btn bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-xl transition">1月</button>
+                <button onclick="filterCalendarMonth(2)" id="cal-month-2" class="cal-month-btn bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-xl transition">2月</button>
+                <button onclick="filterCalendarMonth(3)" id="cal-month-3" class="cal-month-btn bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-xl transition">3月</button>
+                <button onclick="filterCalendarMonth(4)" id="cal-month-4" class="cal-month-btn bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-xl transition">4月</button>
+                <button onclick="filterCalendarMonth(5)" id="cal-month-5" class="cal-month-btn bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-xl transition">5月</button>
+                <button onclick="filterCalendarMonth(6)" id="cal-month-6" class="cal-month-btn bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-xl transition">6月</button>
+                <button onclick="filterCalendarMonth(7)" id="cal-month-7" class="cal-month-btn bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-xl transition">下半年(7-12月)</button>
+            </div>
+
+            <!-- Detailed Event Schedule List -->
+            <div id="calendarEventsContainer" class="flex-grow overflow-y-auto space-y-3 pr-1 text-xs">
+                <!-- Dynamically Populated by JavaScript -->
+            </div>
+
+            <!-- Modal Footer Actions -->
+            <div class="pt-3 border-t border-slate-800 flex flex-wrap justify-between items-center gap-3">
+                <div class="text-[11px] text-slate-400 flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span> 團費活動
+                    <span class="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block ml-2"></span> 常規月聚
+                    <span class="w-2.5 h-2.5 rounded-full bg-purple-500 inline-block ml-2"></span> 專題/避靜
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="openWhatsApp('我想查詢 Petros 節目日曆與報名詳情')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2 rounded-xl text-xs transition flex items-center gap-1.5">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp 查詢行程
+                    </button>
+                    <button onclick="closeModal('calendarModal')" class="bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold px-4 py-2 rounded-xl text-xs transition">
+                        關閉
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2B: Add New Event Modal (Ensures Future-Proof Dynamic Updates) -->
+    <div id="addEventModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="card-glass max-w-md w-full p-6 rounded-3xl border border-emerald-500/40 space-y-4 relative">
+            <button onclick="closeModal('addEventModal')" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="flex items-center gap-3 border-b border-slate-800 pb-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-calendar-plus"></i>
+                </div>
+                <div>
+                    <h3 class="text-base font-bold font-serif text-white">新增團體行程</h3>
+                    <p class="text-xs text-slate-400">可新增 2026、2027 或未來年份之節目</p>
+                </div>
+            </div>
+            <form onsubmit="saveNewEvent(event)" class="space-y-3">
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">年份</label>
+                        <select id="newEventYear" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500">
+                            <option value="2026">2026年</option>
+                            <option value="2027" selected>2027年</option>
+                            <option value="2028">2028年</option>
+                            <option value="2029">2029年</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">月份</label>
+                        <select id="newEventMonth" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500">
+                            <option value="1">1月</option><option value="2">2月</option><option value="3">3月</option>
+                            <option value="4">4月</option><option value="5">5月</option><option value="6">6月</option>
+                            <option value="7">7月</option><option value="8">8月</option><option value="9">9月</option>
+                            <option value="10">10月</option><option value="11">11月</option><option value="12">12月</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">日期與時間</label>
+                    <input type="text" id="newEventDateText" required placeholder="例如：2027年1月16日 (六)" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-emerald-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">活動類別</label>
+                    <select id="newEventCategory" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-emerald-500">
+                        <option value="常規月聚">常規月聚</option>
+                        <option value="團費活動">團費活動</option>
+                        <option value="專題/避靜">專題/避靜</option>
+                        <option value="戶外聯誼">戶外聯誼</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">活動名稱</label>
+                    <input type="text" id="newEventTitle" required placeholder="例如：【開年聚會】男士生命的新轉機" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-emerald-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">活動地點</label>
+                    <input type="text" id="newEventLocation" required placeholder="例如：堂區聚會室 / 戶外" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-emerald-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">詳細簡介</label>
+                    <textarea id="newEventDesc" rows="2" placeholder="請輸入活動內容說明..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-xs transition">
+                    儲存並加至日曆
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal 3: Add Prayer Intention Modal -->
+    <div id="addPrayerModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="card-glass max-w-md w-full p-6 rounded-3xl border border-emerald-500/40 space-y-4 relative">
+            <button onclick="closeModal('addPrayerModal')" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="flex items-center gap-3 border-b border-slate-800 pb-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-hands-praying"></i>
+                </div>
+                <div>
+                    <h3 class="text-base font-bold font-serif text-white">提出代禱意向</h3>
+                    <p class="text-xs text-slate-400">請輸入你的代禱心聲，主內弟兄將同心祈禱</p>
+                </div>
+            </div>
+            <form onsubmit="submitPrayer(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">弟兄稱呼（選填）</label>
+                    <input type="text" id="prayerAuthor" placeholder="例如：Paul 弟兄 或 匿名弟兄" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-emerald-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">代禱內容</label>
+                    <textarea id="prayerContent" required rows="3" placeholder="例如：請為本週職場上的決定及家庭平安代禱..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-xs transition">
+                    送出代禱意向
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal 4: AI Spiritual Companion Modal -->
+    <div id="aiModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="card-glass max-w-lg w-full p-5 rounded-3xl border border-petros-lime/30 space-y-4 relative max-h-[90vh] flex flex-col">
+            <button onclick="closeModal('aiModal')" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="flex items-center justify-between gap-3 border-b border-slate-800 pb-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-petros-lime/20 text-petros-lime flex items-center justify-center">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold font-serif text-white">磐石 AI 靈修夥伴</h3>
+                        <p class="text-[11px] text-slate-400">基於聖言與天主教靈修智慧回答</p>
+                    </div>
+                </div>
+                <button id="langToggleBtn" onclick="toggleAILang()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium px-3 py-1.5 rounded-xl border border-slate-700 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-language"></i> 中文
+                </button>
+            </div>
+
+            <div id="aiChatHistory" class="flex-grow overflow-y-auto space-y-3 p-2 bg-slate-900/60 rounded-2xl min-h-[220px] text-xs">
+                <div class="bg-slate-800 p-3 rounded-2xl text-slate-200 border border-slate-700">
+                    平安！我是磐石 AI 靈修夥伴。請告訴我你今天的感受，或是想了解哪方面的天主聖言？
+                </div>
+            </div>
+
+            <div class="space-y-2 pt-2">
+                <div class="flex gap-2">
+                    <input type="text" id="aiInput" placeholder="輸入你的問題（如：如何面對職場壓力...）" class="flex-grow bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-petros-lime" onkeypress="if(event.key==='Enter') sendAIMessage()">
+                    <button onclick="sendAIMessage()" class="bg-petros-green hover:bg-petros-darkgreen text-white font-bold px-4 py-2 rounded-xl text-xs transition flex items-center gap-1">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 5: General Notification / Verse Viewer Modal -->
+    <div id="infoModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="card-glass max-w-md w-full p-6 rounded-3xl border border-slate-700 space-y-4 relative text-center">
+            <button onclick="closeModal('infoModal')" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="infoModalIcon" class="w-12 h-12 mx-auto rounded-full bg-petros-lime/20 text-petros-lime flex items-center justify-center text-xl font-bold">
+                <i class="fa-solid fa-book-bookmark"></i>
+            </div>
+            <h3 id="infoModalTitle" class="text-lg font-bold font-serif text-white">聖言經文</h3>
+            <p id="infoModalContent" class="text-sm text-slate-300 leading-relaxed font-serif bg-slate-900/80 p-4 rounded-xl border border-slate-800">
+                內容...
+            </p>
+            <button onclick="closeModal('infoModal')" class="bg-slate-800 hover:bg-slate-700 text-white text-xs px-6 py-2.5 rounded-xl font-semibold transition">
+                關閉
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // === BILINGUAL SPIRITUAL DIALOGUE ===
+        const bilingualVerses = [
+            { ref: "依撒意亞 26:4 / Isaiah 26:4", zh: "你們應永遠信賴上主，因為上主是永固的磐石。", en: "Trust in the LORD forever! For the LORD is an everlasting Rock." },
+            { ref: "聖詠 23:1 / Psalm 23:1", zh: "上主是我的牧者，我實在一無所缺。", en: "The LORD is my shepherd; I shall not want." },
+            { ref: "斐理伯書 4:6-7 / Philippians 4:6-7", zh: "你們什麼也不要憂慮，只要事事以祈禱和懇求，並懷著感謝之心，將你們的願望呈告天主；那麼，出人意外的天主的平安，必在基督耶穌內保守你們的心思念慮。", en: "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus." },
+            { ref: "若蘇厄書 1:9 / Joshua 1:9", zh: "你當勇敢堅強，不要害怕，也不要畏懼，因為上主你的天主必與你同在，無論你到哪裡去。", en: "Be strong and courageous. Do not be afraid; do not be discouraged, for the LORD your God will be with you wherever you go." },
+            { ref: "瑪竇福音 11:28 / Matthew 11:28", zh: "凡勞苦和負重擔的，你們都到我跟前來，我要使你們安息。", en: "Come to me, all you who are weary and burdened, and I will give you rest." },
+            { ref: "若望福音 14:27 / John 14:27", zh: "我將平安留給你們，將我的平安賜給你們；我所賜給你們的，不像世界所賜的一樣。", en: "Peace I leave with you; my peace I give you. I do not give to you as the world gives." }
+        ];
+
+        let currentLang = 'zh';
+
+        function toggleAILang() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            const btn = document.getElementById('langToggleBtn');
+            if (btn) btn.innerHTML = currentLang === 'zh' ? '<i class="fa-solid fa-language"></i> 中文' : '<i class="fa-solid fa-language"></i> English';
+            const input = document.getElementById('aiInput');
+            if (input) input.placeholder = currentLang === 'zh' ? '輸入你的問題（如：如何面對職場壓力...）' : 'Type your question (e.g., How to handle work stress...)';
+            const chatBox = document.getElementById('aiChatHistory');
+            if (chatBox && chatBox.firstElementChild) {
+                chatBox.firstElementChild.innerHTML = currentLang === 'zh' 
+                    ? '平安！我是磐石 AI 靈修夥伴。請告訴我你今天的感受，或是想了解哪方面的天主聖言？' 
+                    : 'Peace! I am your PETROS spiritual companion. Share what\'s on your heart or ask about God\'s Word.';
+            }
+        }
+
+
+        // Global QR & URL State
+        let currentQRMode = 'contact'; // 'contact' or 'web'
+        let currentWhatsAppText = '你好！我想查詢 PETROS 磐石男士信仰小團體的聚會與詳情。';
+        let activeCalendarYear = 2026;
+        let activeCalendarMonth = 'all';
+
+        // Default Multi-Year Events Master Array
+        const defaultCalendarEvents = [
+            // 2026 Events
+            {
+                id: 101, year: 2026, month: 1, date: "2026年1月3日 - 1月5日",
+                category: "團費活動", catColor: "border-emerald-500/40 text-emerald-400 bg-emerald-500/10",
+                title: "【年度開年避靜】磐石靈修營：建在磐石上的生命",
+                description: "三天兩夜安靜祈禱、朝聖與弟兄靈修分享，奠定新一年屬靈根基。", location: "聖母神樂院 / 避靜院"
+            },
+            {
+                id: 102, year: 2026, month: 1, date: "2026年1月17日 (六)",
+                category: "常規月聚", catColor: "border-blue-500/40 text-blue-400 bg-blue-500/10",
+                title: "【一月月聚】新年新心：男士在家庭與職場的角色",
+                description: "聖言分享與分組討論：如何在變幻環境中持守基督信仰。", location: "團體聚會室"
+            },
+            {
+                id: 103, year: 2026, month: 2, date: "2026年2月14日 (六)",
+                category: "常規月聚", catColor: "border-blue-500/40 text-blue-400 bg-blue-500/10",
+                title: "【二月月聚】四旬期靈修前瞻：克己與祈禱",
+                description: "預備四旬期身心靈，分享如何在工作中深化祈禱生活。", location: "團體聚會室"
+            },
+            {
+                id: 104, year: 2026, month: 3, date: "2026年3月19日 (四)",
+                category: "專題/避靜", catColor: "border-purple-500/40 text-purple-400 bg-purple-500/10",
+                title: "【大聖若瑟主保瞻禮】若瑟精神與男士承諾",
+                description: "敬禮大聖若瑟主保彌撒及男士團契聚餐。", location: "堂區聖堂"
+            },
+            {
+                id: 105, year: 2026, month: 5, date: "2026年5月1日 (五)",
+                category: "團費活動", catColor: "border-emerald-500/40 text-emerald-400 bg-emerald-500/10",
+                title: "【聖若瑟勞工主保慶日】男士職場信仰研討與聚餐",
+                description: "探訪勞工團體與職場信仰倫理工作坊。", location: "公教勞工中心"
+            },
+            {
+                id: 106, year: 2026, month: 6, date: "2026年6月28日 (日)",
+                category: "團費活動", catColor: "border-emerald-500/40 text-emerald-400 bg-emerald-500/10",
+                title: "【磐石家庭同樂日】男士與家人戶外聯誼聚餐",
+                description: "帶同家人子女一同參加，增進家庭與弟兄感情。", location: "郊野公園燒烤場"
+            },
+            {
+                id: 107, year: 2026, month: 12, date: "2026年12月19日 (六)",
+                category: "團費活動", catColor: "border-emerald-500/40 text-emerald-400 bg-emerald-500/10",
+                title: "【年終感恩晚會】磐石聖誕佳節團聚晚宴",
+                description: "弟兄與家屬聚餐、聖誕報佳音與感恩分享。", location: "團契會堂"
+            },
+
+            // 2027 Events (Expandable for upcoming years)
+            {
+                id: 201, year: 2027, month: 1, date: "2027年1月9日 (六)",
+                category: "常規月聚", catColor: "border-blue-500/40 text-blue-400 bg-blue-500/10",
+                title: "【2027 開年月聚】在主內起步：重新立定心志",
+                description: "新一年靈修目標與弟兄彼此代禱承諾。", location: "團體聚會室"
+            },
+            {
+                id: 202, year: 2027, month: 3, date: "2027年3月19日 (五)",
+                category: "專題/避靜", catColor: "border-purple-500/40 text-purple-400 bg-purple-500/10",
+                title: "【2027 大聖若瑟瞻禮】若瑟的沈默與行動力",
+                description: "學習若瑟主保的忍耐與家庭守護使命。", location: "堂區聖堂"
+            },
+            {
+                id: 203, year: 2027, month: 7, date: "2027年7月17日 (六)",
+                category: "團費活動", catColor: "border-emerald-500/40 text-emerald-400 bg-emerald-500/10",
+                title: "【2027 夏季靈修】磐石山林祈禱日",
+                description: "走出城市，在山林流水間尋求主的安息與力量。", location: "西貢郊野公園"
+            }
+        ];
+
+        // Load dynamic calendar events from localStorage or fallback
+        function getStoredEvents() {
+            const stored = localStorage.getItem('petros_calendar_events');
+            if (stored) {
+                try {
+                    return JSON.parse(stored);
+                } catch(e) {
+                    return defaultCalendarEvents;
+                }
+            }
+            return defaultCalendarEvents;
+        }
+
+        let allCalendarEvents = getStoredEvents();
+
+        // Save new custom event to dynamic list
+        function saveNewEvent(e) {
+            e.preventDefault();
+            const year = parseInt(document.getElementById('newEventYear').value);
+            const month = parseInt(document.getElementById('newEventMonth').value);
+            const dateText = document.getElementById('newEventDateText').value.trim();
+            const cat = document.getElementById('newEventCategory').value;
+            const title = document.getElementById('newEventTitle').value.trim();
+            const loc = document.getElementById('newEventLocation').value.trim();
+            const desc = document.getElementById('newEventDesc').value.trim() || '無額外說明';
+
+            let catColor = "border-blue-500/40 text-blue-400 bg-blue-500/10";
+            if (cat === "團費活動" || cat === "戶外聯誼") catColor = "border-emerald-500/40 text-emerald-400 bg-emerald-500/10";
+            if (cat === "專題/避靜") catColor = "border-purple-500/40 text-purple-400 bg-purple-500/10";
+
+            const newEvt = {
+                id: Date.now(),
+                year: year,
+                month: month,
+                date: dateText,
+                category: cat,
+                catColor: catColor,
+                title: title,
+                description: desc,
+                location: loc
+            };
+
+            allCalendarEvents.unshift(newEvt);
+            localStorage.setItem('petros_calendar_events', JSON.stringify(allCalendarEvents));
+
+            closeModal('addEventModal');
+            switchCalendarYear(year);
+            openModal('calendarModal');
+
+            document.getElementById('infoModalTitle').innerText = "行程新增成功！";
+            document.getElementById('infoModalContent').innerText = `已成功新增【${title}】至 ${year} 年日曆中！`;
+            openModal('infoModal');
+        }
+
+        // Initial Prayer List Data
+        const prayers = [
+            {
+                id: 1, author: "張弟兄", content: "請為下週職場面臨的商業抉擇代禱，求主賜下智慧與平靜的心靈。", amens: 8, time: "2小時前"
+            },
+            {
+                id: 2, author: "Paul 弟兄", content: "為家中心靈不安的家人祈禱，願天主的慈愛親自撫平創傷與擔憂。", amens: 12, time: "5小時前"
+            }
+        ];
+
+        // Get configured or default live URL
+        function getAppLiveUrl() {
+            const savedUrl = localStorage.getItem('petros_live_url');
+            if (savedUrl && savedUrl.trim() !== '') return savedUrl.trim();
+
+            let current = window.location.href;
+            if (current.startsWith('about:blank') || current.startsWith('blob:') || current.includes('localhost') || current.includes('127.0.0.1')) {
+                return 'https://petros-faith-app.org'; // Default placeholder URL
+            }
+            return current;
+        }
+
+        function saveCustomLiveUrl() {
+            const val = document.getElementById('customLiveUrlInput').value.trim();
+            if (val) {
+                localStorage.setItem('petros_live_url', val);
+                updateSharePreviewText();
+                document.getElementById('infoModalTitle').innerText = "網址儲存成功！";
+                document.getElementById('infoModalContent').innerText = `已成功將 Web App 網址設為：\n${val}\n現在所有 WhatsApp 分享與 QR Code 均已自動更新！`;
+                openModal('infoModal');
+            }
+        }
+
+        function onLiveUrlChanged() {
+            const val = document.getElementById('customLiveUrlInput').value.trim();
+            updateSharePreviewText(val || getAppLiveUrl());
+        }
+
+        function updateSharePreviewText(overrideUrl = null) {
+            const liveUrl = overrideUrl || getAppLiveUrl();
+            const previewElem = document.getElementById('shareTextPreview');
+            if (previewElem) {
+                previewElem.innerText = `【PETROS 磐石 男士信仰小團體】\n主內弟兄平安！邀請你一起加入 PETROS 磐石男士信仰小團體。\n✨ 內含最新動態年度節目行程日曆\n✨ AI 聖言靈修助手與代禱牆\n✨ 專題講座與男士團契聚會\n\n點擊連結開啟 Web App：\n${liveUrl}`;
+            }
+        }
+
+        // Direct WhatsApp Sharing Functions
+        function shareToWhatsAppDirect() {
+            const liveUrl = getAppLiveUrl();
+            const message = `【PETROS 磐石 男士信仰小團體】\n主內弟兄平安！邀請你一起加入 PETROS 磐石男士信仰小團體。\n✨ 內含最新動態年度節目行程日曆\n✨ AI 聖言靈修助手與代禱牆\n✨ 專題講座與男士團契聚會\n\n點擊連結開啟 Web App：\n${liveUrl}`;
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        function copyShareText() {
+            const liveUrl = getAppLiveUrl();
+            const shareContent = `【PETROS 磐石 男士信仰小團體】\n主內弟兄平安！邀請你一起加入 PETROS 磐石男士信仰小團體。\n✨ 內含最新動態年度節目行程日曆\n✨ AI 聖言靈修助手與代禱牆\n✨ 專題講座與男士團契聚會\n\n點擊連結開啟：${liveUrl}`;
+
+            const dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = shareContent;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+
+            document.getElementById('infoModalTitle').innerText = "已成功複製！";
+            document.getElementById('infoModalContent').innerText = "分享內容與連結已成功複製到剪貼簿。你可以隨時貼上至 WhatsApp 或社交平台！";
+            openModal('infoModal');
+        }
+
+        // Generate Scannable QR Code URL
+        function generateQRCodeUrl(data) {
+            return `https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=15&ecc=M&data=${encodeURIComponent(data)}`;
+        }
+
+        // Switch QR Type in Modal
+        function switchQRType(mode) {
+            currentQRMode = mode;
+            const btnContact = document.getElementById('qrTabContact');
+            const btnWeb = document.getElementById('qrTabWeb');
+            const inputLabel = document.getElementById('qrInputLabel');
+            const customInput = document.getElementById('qrCustomInput');
+
+            if (mode === 'contact') {
+                btnContact.className = 'flex-1 py-1.5 rounded-lg bg-emerald-600 text-white font-bold transition shadow-md';
+                btnWeb.className = 'flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white transition';
+                document.getElementById('qrModalTitle').innerText = "WhatsApp 即時對話 QR Code";
+                document.getElementById('qrModalSub').innerText = "手機掃描後將自動開啟 WhatsApp 發送訊息給小組";
+                inputLabel.innerText = "WhatsApp 對話訊息 / 號碼：";
+                customInput.value = "https://api.whatsapp.com/send?text=" + encodeURIComponent(currentWhatsAppText);
+            } else {
+                btnWeb.className = 'flex-1 py-1.5 rounded-lg bg-amber-500 text-slate-950 font-bold transition shadow-md';
+                btnContact.className = 'flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white transition';
+                document.getElementById('qrModalTitle').innerText = "Web App 網頁開啟 QR Code";
+                document.getElementById('qrModalSub').innerText = "手機相機掃描後可直接於手機開啟此 Web App";
+                inputLabel.innerText = "Web App 目標網址：";
+                customInput.value = getAppLiveUrl();
+            }
+
+            updateCustomQR();
+        }
+
+        function updateCustomQR() {
+            const inputVal = document.getElementById('qrCustomInput').value.trim();
+            const qrImg = document.getElementById('mainQrImage');
+            const targetPreview = document.getElementById('qrTargetPreview');
+
+            if (!inputVal) return;
+            qrImg.src = generateQRCodeUrl(inputVal);
+            targetPreview.innerText = inputVal;
+        }
+
+        function testQRLink() {
+            const link = document.getElementById('qrCustomInput').value.trim();
+            if (link) window.open(link, '_blank');
+        }
+
+        // Modal Controls
+        function openModal(modalId, param = '') {
+            document.getElementById(modalId).classList.remove('hidden');
+
+            if (modalId === 'shareModal') {
+                const liveUrlInput = document.getElementById('customLiveUrlInput');
+                if (liveUrlInput) liveUrlInput.value = getAppLiveUrl();
+                updateSharePreviewText();
+            }
+
+            if (modalId === 'qrModal') {
+                if (param === 'web') switchQRType('web');
+                else switchQRType('contact');
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        // On DOM Load setup
+        document.addEventListener("DOMContentLoaded", () => {
+            renderPrayers();
+            renderCalendarEvents();
+
+            // Hide warning banner if running on actual public web server
+            let url = window.location.href;
+            if (!url.startsWith('about:blank') && !url.startsWith('blob:') && !url.includes('localhost') && !url.includes('127.0.0.1')) {
+                const banner = document.getElementById('domainWarningBanner');
+                if (banner) banner.style.display = 'none';
+            }
+        });
+
+        // Calendar Multi-Year Filter & Render Logic
+        function renderCalendarEvents() {
+            const container = document.getElementById('calendarEventsContainer');
+            if (!container) return;
+
+            let filtered = allCalendarEvents;
+
+            if (activeCalendarYear !== 'all') {
+                if (activeCalendarYear === 2028) {
+                    filtered = filtered.filter(e => e.year >= 2028);
+                } else {
+                    filtered = filtered.filter(e => e.year === activeCalendarYear);
+                }
+            }
+
+            if (activeCalendarMonth === 7) {
+                filtered = filtered.filter(e => e.month >= 7);
+            } else if (activeCalendarMonth !== 'all') {
+                filtered = filtered.filter(e => e.month === activeCalendarMonth);
+            }
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 bg-slate-900/60 rounded-2xl border border-slate-800 text-slate-400">
+                        <i class="fa-regular fa-calendar-xmark text-3xl mb-2 text-slate-500 block"></i>
+                        <span>此年份/月份暫無既定行程。歡迎點擊右上角「新增行程」進行補充！</span>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(item => `
+                <div class="bg-slate-900/90 p-4 rounded-2xl border border-slate-800 hover:border-slate-700 transition flex flex-col md:flex-row md:items-center justify-between gap-3">
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold text-amber-400 flex items-center gap-1">
+                                <i class="fa-solid fa-clock"></i> ${item.date}
+                            </span>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full border ${item.catColor} font-semibold">
+                                ${item.category}
+                            </span>
+                        </div>
+                        <h4 class="font-bold text-sm text-white font-serif">${item.title}</h4>
+                        <p class="text-xs text-slate-400">${item.description}</p>
+                    </div>
+                    <div class="flex md:flex-col items-start md:items-end justify-between gap-1 border-t md:border-t-0 border-slate-800 pt-2 md:pt-0">
+                        <span class="text-[11px] text-slate-400 flex items-center gap-1">
+                            <i class="fa-solid fa-location-dot text-red-400"></i> ${item.location}
+                        </span>
+                        <button onclick="rsvpEvent('${item.title}')" class="bg-slate-800 hover:bg-slate-700 text-petros-lime text-[11px] px-3 py-1 rounded-lg border border-slate-700 transition font-medium">
+                            報名 / 查詢
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function switchCalendarYear(yr) {
+            activeCalendarYear = yr;
+            document.querySelectorAll('.year-btn').forEach(btn => {
+                btn.classList.remove('bg-amber-500', 'text-slate-950', 'font-bold');
+                btn.classList.add('bg-slate-800', 'text-slate-300');
+            });
+
+            const activeBtn = document.getElementById(`year-btn-${yr}`);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-amber-500', 'text-slate-950', 'font-bold');
+                activeBtn.classList.remove('bg-slate-800', 'text-slate-300');
+            }
+
+            const headerElem = document.getElementById('selectedYearHeaderTitle');
+            if (headerElem) headerElem.innerText = yr === 'all' ? '跨年' : `${yr}年`;
+
+            renderCalendarEvents();
+        }
+
+        function filterCalendarMonth(m) {
+            activeCalendarMonth = m;
+            document.querySelectorAll('.cal-month-btn').forEach(btn => {
+                btn.classList.remove('bg-amber-500', 'text-slate-950', 'font-bold');
+                btn.classList.add('bg-slate-800', 'text-slate-300');
+            });
+
+            const activeBtn = document.getElementById(`cal-month-${m}`);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-amber-500', 'text-slate-950', 'font-bold');
+                activeBtn.classList.remove('bg-slate-800', 'text-slate-300');
+            }
+            renderCalendarEvents();
+        }
+
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('tab-active');
+                btn.classList.add('text-slate-400');
+            });
+
+            document.getElementById(tabId).classList.remove('hidden');
+            const activeBtn = document.getElementById('btn-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.add('tab-active');
+                activeBtn.classList.remove('text-slate-400');
+            }
+        }
+
+        // WhatsApp Helper
+        function openWhatsApp(msg = '你好！我想查詢 PETROS 磐石男士信仰小團體的聚會與詳情。') {
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        // Verse Viewer
+        function showVerse(title, text) {
+            document.getElementById('infoModalTitle').innerText = title;
+            document.getElementById('infoModalContent').innerText = `「${text}」`;
+            openModal('infoModal');
+        }
+
+        // Render Prayer Wall
+        function renderPrayers() {
+            const container = document.getElementById('prayerList');
+            if (!container) return;
+
+            container.innerHTML = prayers.map(p => `
+                <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="font-bold text-emerald-400"><i class="fa-solid fa-user-tag mr-1"></i>${p.author}</span>
+                        <span class="text-slate-500">${p.time}</span>
+                    </div>
+                    <p class="text-xs text-slate-200 leading-relaxed">${p.content}</p>
+                    <div class="flex justify-end items-center pt-1">
+                        <button onclick="addAmen(${p.id})" class="text-xs bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2.5 py-1 rounded-lg transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-hands-praying"></i> 阿們祈禱 (${p.amens})
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function addAmen(id) {
+            const prayer = prayers.find(p => p.id === id);
+            if (prayer) {
+                prayer.amens++;
+                renderPrayers();
+            }
+        }
+
+        function submitPrayer(e) {
+            e.preventDefault();
+            const author = document.getElementById('prayerAuthor').value.trim() || '匿名弟兄';
+            const content = document.getElementById('prayerContent').value.trim();
+
+            if (content) {
+                prayers.unshift({
+                    id: Date.now(),
+                    author: author,
+                    content: content,
+                    amens: 1,
+                    time: "剛剛"
+                });
+                renderPrayers();
+                closeModal('addPrayerModal');
+                document.getElementById('prayerContent').value = '';
+            }
+        }
+
+        // Contact Form Handling
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('contactName').value;
+            const topic = document.getElementById('contactTopic').value;
+            
+            document.getElementById('infoModalTitle').innerText = "留言已成功送出";
+            document.getElementById('infoModalContent').innerText = `多謝 ${name} 弟兄！我們已收到關於「${topic}」的查詢，磐石團體負責弟兄會盡快與你聯絡！天主保佑！`;
+            openModal('infoModal');
+            e.target.reset();
+        }
+
+        // RSVP Event
+        function rsvpEvent(eventName) {
+            document.getElementById('infoModalTitle').innerText = "聚會報名確認";
+            document.getElementById('infoModalContent').innerText = `感謝你報名參加【${eventName}】！請保留時間，負責弟兄將透過 WhatsApp 為你傳送聚會地點與詳細資訊。`;
+            openModal('infoModal');
+        }
+
+        // Gemini AI Spiritual Reflection API Logic
+        async function generateAIWisdom() {
+            openModal('aiModal');
+            const chatBox = document.getElementById('aiChatHistory');
+            if (!chatBox) return;
+            chatBox.innerHTML += `<div class="bg-slate-800 p-3 rounded-2xl text-slate-100 border border-slate-700 leading-relaxed"><strong>依撒意亞 26:4 / Isaiah 26:4</strong><br>你們應永遠信賴上主，因為上主是永固的磐石。<br><br><em>主啊，求祢在我的風浪中賜我堅定的信心。今天我願意把一件憂慮交託給祢，並以平安的一步回應祢的帶領。</em></div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        async function sendAIMessage() {
+            const input = document.getElementById('aiInput');
+            const message = input ? input.value.trim() : '';
+            if (!message) return;
+
+            const chatBox = document.getElementById('aiChatHistory');
+            if (!chatBox) return;
+
+            chatBox.innerHTML += `<div class="bg-petros-lime/10 p-3 rounded-2xl text-petros-lime text-right font-medium border border-petros-lime/20">${message}</div>`;
+            chatBox.innerHTML += `<div class="bg-slate-800 p-3 rounded-2xl text-slate-300 border border-slate-700 italic flex items-center gap-2"><i class="fa-solid fa-circle-notch fa-spin"></i> ${currentLang === 'zh' ? '正在反省默想中...' : 'Reflecting on Scripture...'}</div>`;
+            if (input) input.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            setTimeout(() => {
+                if (chatBox.lastElementChild) chatBox.lastElementChild.remove();
+                const v = bilingualVerses[Math.floor(Math.random() * bilingualVerses.length)];
+                const verseText = currentLang === 'zh' ? v.zh : v.en;
+                const prayer = currentLang === 'zh' ? '主啊，求祢賜我信德的眼光，在祢的聖言中找到力量與方向。阿們。' : 'Lord, grant me eyes of faith to find strength and direction in Your Word. Amen.';
+                chatBox.innerHTML += `<div class="bg-slate-800 p-3 rounded-2xl text-slate-100 border border-slate-700 leading-relaxed"><strong>${v.ref}</strong><br>${verseText.replace(/\n/g, '<br>')}<br><br><em>${prayer}</em></div>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 600);
+        }
+    </script>
+</body>
+</html>
