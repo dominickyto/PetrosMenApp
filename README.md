@@ -1,0 +1,1 @@
+PETROS exists to support the spiritual formation of Catholic men by providing resources, tools, and community frameworks that strengthen faith, deepen Scripture engagement, cultivate prayer, and encourage active evangelization. This project aims to build a stable, scalable platform that empowers men to grow as disciples grounded in Christ the Rock.
